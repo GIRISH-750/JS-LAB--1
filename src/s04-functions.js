@@ -19,6 +19,6 @@ export const toCardView = (course) => ({
 export function buildButtons(courses, onAdd) {
   return courses.map((course) => ({
     label: `Add ${course.code}`,
-    onClick: onAdd(course.id),
+    onClick: () => onAdd(course.id),
   }));
 }
