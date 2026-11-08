@@ -9,21 +9,29 @@ const dec = document.querySelector("#dec");
 const reset = document.querySelector("#reset");
 const stepInput = document.querySelector("#step");
 
-// Stage 1 — one number, one button, one line that updates the page.
+// Stage 2 — every handler updates every place by hand.
 let count = 0;
 
 inc.addEventListener("click", () => {
   count += 1;
-  countEl.textContent = count; // ← the line that "tells the screen"
+  countEl.textContent = count;
+  parityEl.textContent = count % 2 === 0 ? "even" : "odd";
+  dec.disabled = count - 1 < 0;
+  document.title = `Count: ${count}`;
 });
 
-// Stage 2 — TODO: make "− Step" and "Reset" work the same way, then make the
-//   parity label ("even"/"odd"), the disabled "−" at zero, and the tab title
-//   (document.title) follow the count. Count how many update lines you wrote.
+dec.addEventListener("click", () => {
+  count -= 1;
+  countEl.textContent = count;
+  parityEl.textContent = count % 2 === 0 ? "even" : "odd";
+  dec.disabled = count - 1 < 0;
+  document.title = `Count: ${count}`;
+});
 
-// Stage 3 — TODO: move every update line into ONE function, render(),
-//   and call it after every change.
-
-// Stage 4 — TODO: write useState in src/s15-state.js, import it, and
-//   replace `let count` with  const [getCount, setCount] = useState(0, render);
-//   Then add the step input as a second piece of state.
+reset.addEventListener("click", () => {
+  count = 0;
+  countEl.textContent = count;
+  parityEl.textContent = count % 2 === 0 ? "even" : "odd";
+  dec.disabled = count - 1 < 0;
+  document.title = `Count: ${count}`;
+});
