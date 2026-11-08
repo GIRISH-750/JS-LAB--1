@@ -24,10 +24,10 @@ export function byField(field) {
 // A setter that accepts either a new value or a function that computes
 // the new value from the current one.
 export function applyUpdate(current, update) {
-  throw new Error("TODO");
+  return typeof update === "function" ? update(current) : update;
 }
 
 // Apply a list of updates in order, each one to the result of the last.
 export function applyAll(start, updates) {
-  throw new Error("TODO");
+  return updates.reduce((value, update) => applyUpdate(value, update), start);
 }
