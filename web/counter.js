@@ -1,6 +1,7 @@
 // Section 15 exercise: a counter, three ways.
 // Run it:  npm run web   → open http://localhost:5500/web/counter.html
 // Follow section 15 of the lab doc: stage 1 → 2 → 3 → 4.
+import { useState } from "../src/s15-state.js";
 
 const countEl = document.querySelector("#count");
 const parityEl = document.querySelector("#parity");
@@ -9,29 +10,25 @@ const dec = document.querySelector("#dec");
 const reset = document.querySelector("#reset");
 const stepInput = document.querySelector("#step");
 
-// Stage 3 — one function knows how the number becomes the page.
-let count = 0;
+// Stage 4 — changing the value and redrawing are now one action.
+const [getCount, setCount] = useState(0, render);
+const [getStep, setStep] = useState(1, render);
 
 function render() {
+  const count = getCount();
   countEl.textContent = count;
   parityEl.textContent = count % 2 === 0 ? "even" : "odd";
-  dec.disabled = count - 1 < 0;
+  dec.disabled = count - getStep() < 0;
   document.title = `Count: ${count}`;
 }
 
-inc.addEventListener("click", () => {
-  count += 1;
-  render();
-});
+inc.addEventListener("click", () => setCount(getCount() + getStep()));
+dec.addEventListener("click", () => setCount(getCount() - getStep()));
+reset.addEventListener("click", () => setCount(0));
 
-dec.addEventListener("click", () => {
-  count -= 1;
-  render();
-});
-
-reset.addEventListener("click", () => {
-  count = 0;
-  render();
+stepInput.addEventListener("input", () => {
+  const step = Number(stepInput.value);
+  setStep(Number.isInteger(step) && step >= 1 ? step : 1);
 });
 
 render();
