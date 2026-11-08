@@ -3,7 +3,13 @@
 // values: { code, title, department, credits } — all strings, as read from inputs.
 // Complete when every field has non-blank text and credits is a whole number 1–6.
 export function isComplete(values) {
-  throw new Error("TODO");
+  const credits = Number(values.credits);
+  return (
+    Object.values(values).every((value) => value.trim() !== "") &&
+    Number.isInteger(credits) &&
+    credits >= 1 &&
+    credits <= 6
+  );
 }
 
 // Turn form values into a course object (the shape the API uses), with a
