@@ -18,5 +18,10 @@ export function makeCreditCheck(limit) {
 // A value only a function can change.
 // Returns [get, set]. The value lives in the closure; nothing else can reach it.
 export function createBox(initial) {
-  throw new Error("TODO");
+  let value = initial;
+  const get = () => value;
+  const set = (next) => {
+    value = next;
+  };
+  return [get, set];
 }
