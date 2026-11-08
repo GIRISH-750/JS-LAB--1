@@ -4,22 +4,31 @@ import { byField } from "./s05-higher-order.js";
 
 // Courses in one department. Case-insensitive.
 export function byDepartment(courses, department) {
-  throw new Error("TODO");
+  return courses.filter(
+    (course) => course.department.toLowerCase() === department.toLowerCase()
+  );
 }
 
 // Courses that still have seats.
 export function openOnly(courses) {
-  throw new Error("TODO");
+  return courses.filter((course) => course.seatsLeft > 0);
 }
 
 // Case-insensitive match on code OR title. A blank query returns everything.
 export function searchCourses(courses, query) {
-  throw new Error("TODO");
+  const text = query.trim().toLowerCase();
+  return courses.filter(
+    (course) =>
+      course.code.toLowerCase().includes(text) ||
+      course.title.toLowerCase().includes(text)
+  );
 }
 
 // The course with this code (case-insensitive), or undefined.
 export function findByCode(courses, code) {
-  throw new Error("TODO");
+  return courses.find(
+    (course) => course.code.toLowerCase() === code.toLowerCase()
+  );
 }
 
 // Sum of credits.
