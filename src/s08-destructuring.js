@@ -13,11 +13,13 @@ export function updateField(form, name, value) {
 
 // Return a NEW object without one key. Use rest in a destructuring.
 export function withoutField(obj, key) {
-  throw new Error("TODO");
+  const { [key]: removed, ...rest } = obj;
+  return rest;
 }
 
 // Why does useState return an array and not an object? Because array
 // destructuring lets the caller pick the names. Return [first, rest].
 export function firstAndRest(list) {
-  throw new Error("TODO");
+  const [first, ...rest] = list;
+  return [first, rest];
 }
