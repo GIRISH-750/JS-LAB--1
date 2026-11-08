@@ -22,8 +22,8 @@ function render() {
   document.title = `Count: ${count}`;
 }
 
-inc.addEventListener("click", () => setCount(getCount() + getStep()));
-dec.addEventListener("click", () => setCount(getCount() - getStep()));
+inc.addEventListener("click", () => setCount((c) => c + getStep()));
+dec.addEventListener("click", () => setCount((c) => c - getStep()));
 reset.addEventListener("click", () => setCount(0));
 
 stepInput.addEventListener("input", () => {
