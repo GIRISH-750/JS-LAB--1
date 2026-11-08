@@ -51,7 +51,7 @@ export function departments(courses) {
 
 // A sorted COPY. The input must not change. Reuse byField from section 05.
 export function sortedBy(courses, field) {
-  throw new Error("TODO");
+  return [...courses].sort(byField(field));
 }
 
 // Is at least one course full?
@@ -75,16 +75,22 @@ export function courseCards(courses, department) {
 
 // Planner ids → the course objects, in planner order. Unknown ids are skipped.
 export function plannerCourses(planner, courses) {
-  throw new Error("TODO");
+  return planner
+    .map((id) => courses.find((course) => course.id === id))
+    .filter(Boolean);
 }
 
 // Total credits of the planned courses.
 export function plannerCredits(planner, courses) {
-  throw new Error("TODO");
+  return totalCredits(plannerCourses(planner, courses));
 }
 
 // Can this course be added? It must exist, have a seat, not already be in
 // the planner, and keep the total within the limit (24 by default).
 export function canAdd(planner, courses, courseId, limit = 24) {
-  throw new Error("TODO");
+  const course = courses.find((c) => c.id === courseId);
+  if (!course || course.seatsLeft === 0 || planner.includes(courseId)) {
+    return false;
+  }
+  return plannerCredits(planner, courses) + course.credits <= limit;
 }
