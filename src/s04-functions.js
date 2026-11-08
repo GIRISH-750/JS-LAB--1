@@ -4,9 +4,12 @@
 //   { id, heading: "CS402 · Enterprise Software Development",
 //     meta: "4 credits · Computer Science", isFull: false }
 // Write it as an ARROW function with an implicit return of an object.
-export const toCardView = (course) => {
-  throw new Error("TODO");
-};
+export const toCardView = (course) => ({
+  id: course.id,
+  heading: `${course.code} · ${course.title}`,
+  meta: `${course.credits} credits · ${course.department}`,
+  isFull: course.seatsLeft === 0,
+});
 
 // One button per course. Each button's onClick must be a FUNCTION that,
 // when called later, calls onAdd with that course's id.
