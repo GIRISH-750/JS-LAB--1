@@ -33,17 +33,20 @@ export function findByCode(courses, code) {
 
 // Sum of credits.
 export function totalCredits(courses) {
-  throw new Error("TODO");
+  return courses.reduce((sum, course) => sum + course.credits, 0);
 }
 
 // { "Computer Science": 5, "Electronics": 4, ... }
 export function countByDepartment(courses) {
-  throw new Error("TODO");
+  return courses.reduce((counts, course) => {
+    counts[course.department] = (counts[course.department] ?? 0) + 1;
+    return counts;
+  }, {});
 }
 
 // Unique department names, sorted A→Z.
 export function departments(courses) {
-  throw new Error("TODO");
+  return [...new Set(courses.map((course) => course.department))].sort();
 }
 
 // A sorted COPY. The input must not change. Reuse byField from section 05.
