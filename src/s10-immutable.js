@@ -4,12 +4,14 @@
 
 // Add an id. If it is already there, return the SAME array (nothing changed).
 export function addToPlanner(planner, courseId) {
-  throw new Error("TODO");
+  return planner.includes(courseId) ? planner : [...planner, courseId];
 }
 
 // Remove an id. If it is not there, return the SAME array.
 export function removeFromPlanner(planner, courseId) {
-  throw new Error("TODO");
+  return planner.includes(courseId)
+    ? planner.filter((id) => id !== courseId)
+    : planner;
 }
 
 // Return a new course object with some fields changed.
