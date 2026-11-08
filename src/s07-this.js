@@ -12,9 +12,11 @@ export class PlannerList {
     this.ids = [];
   }
 
-  add(id) {
+  // Arrow field: it has no `this` of its own, so it keeps the instance's
+  // `this` even when passed around as a callback.
+  add = (id) => {
     this.ids.push(id);
-  }
+  };
 
   describe() {
     return `${this.owner} has ${this.ids.length} course(s) planned`;
