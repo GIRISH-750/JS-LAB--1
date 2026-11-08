@@ -9,29 +9,29 @@ const dec = document.querySelector("#dec");
 const reset = document.querySelector("#reset");
 const stepInput = document.querySelector("#step");
 
-// Stage 2 — every handler updates every place by hand.
+// Stage 3 — one function knows how the number becomes the page.
 let count = 0;
 
-inc.addEventListener("click", () => {
-  count += 1;
+function render() {
   countEl.textContent = count;
   parityEl.textContent = count % 2 === 0 ? "even" : "odd";
   dec.disabled = count - 1 < 0;
   document.title = `Count: ${count}`;
+}
+
+inc.addEventListener("click", () => {
+  count += 1;
+  render();
 });
 
 dec.addEventListener("click", () => {
   count -= 1;
-  countEl.textContent = count;
-  parityEl.textContent = count % 2 === 0 ? "even" : "odd";
-  dec.disabled = count - 1 < 0;
-  document.title = `Count: ${count}`;
+  render();
 });
 
 reset.addEventListener("click", () => {
   count = 0;
-  countEl.textContent = count;
-  parityEl.textContent = count % 2 === 0 ? "even" : "odd";
-  dec.disabled = count - 1 < 0;
-  document.title = `Count: ${count}`;
+  render();
 });
+
+render();
