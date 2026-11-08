@@ -7,9 +7,12 @@ import { isComplete, toCourse } from "../src/s13-forms.js";
 
 // Step 1 — select the elements you need (querySelector / querySelectorAll).
 const form = document.querySelector("#add-course");
-// TODO: fields — every input AND the select inside the form, as a real ARRAY
-// TODO: submit — the submit button
-// TODO: departmentSelect, list (#course-list), count (#count), status (#status)
+const fields = [...form.querySelectorAll("input, select")];
+const submit = form.querySelector('button[type="submit"]');
+const departmentSelect = form.querySelector('select[name="department"]');
+const list = document.querySelector("#course-list");
+const count = document.querySelector("#count");
+const status = document.querySelector("#status");
 
 // A closure that hands out ids after the catalogue's last one (20).
 const nextId = (() => {
@@ -18,8 +21,9 @@ const nextId = (() => {
 })();
 
 // Step 2 — fill the department dropdown from the data.
-// Hint: departments(courses).map((name) => new Option(name, name))
-// TODO
+departmentSelect.append(
+  ...departments(courses).map((name) => new Option(name, name))
+);
 
 // Step 3 — read every field into one object: { code, title, department, credits }.
 // Hint: reduce over fields with a computed key [field.name].
