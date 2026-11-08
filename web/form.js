@@ -28,12 +28,17 @@ departmentSelect.append(
 // Step 3 — read every field into one object: { code, title, department, credits }.
 // Hint: reduce over fields with a computed key [field.name].
 function readForm() {
-  // TODO
+  return fields.reduce(
+    (values, field) => ({ ...values, [field.name]: field.value }),
+    {}
+  );
 }
 
 // Step 4 — enable the button only when the form is complete.
 // Listen for "input" on the FORM (every field's event bubbles up to it).
-// TODO
+form.addEventListener("input", () => {
+  submit.disabled = !isComplete(readForm());
+});
 
 // Step 5 — on "submit": stop the page reload, build the course with
 // toCourse(values, nextId), append renderItem(course) to the list,
