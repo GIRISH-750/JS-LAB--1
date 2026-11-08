@@ -5,4 +5,4 @@ import { footerClick } from "./footer.js";
 headerClick();
 headerClick();
 console.log("footer sees:", footerClick());
-// Prediction:  (is `clicks` shared between header and footer, or does each get its own?)
+// Prediction: footer sees: 3. A module runs once, so clicks is shared.
