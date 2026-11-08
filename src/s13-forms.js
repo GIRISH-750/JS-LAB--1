@@ -16,5 +16,14 @@ export function isComplete(values) {
 // fresh id from nextId. Trims text, upper-cases the code, numbers the credits.
 // Call nextId() for the id; description is null; capacity and seatsLeft are both 60.
 export function toCourse(values, nextId) {
-  throw new Error("TODO");
+  return {
+    id: nextId(),
+    code: values.code.trim().toUpperCase(),
+    title: values.title.trim(),
+    description: null,
+    department: values.department.trim(),
+    credits: Number(values.credits),
+    capacity: 60,
+    seatsLeft: 60,
+  };
 }
