@@ -13,7 +13,11 @@ export function useState(initial, onChange) {
   const getState = () => state;
 
   const setState = (next) => {
-    state = next;
+    const value = typeof next === "function" ? next(state) : next;
+    if (Object.is(value, state)) {
+      return;
+    }
+    state = value;
     onChange();
   };
 
