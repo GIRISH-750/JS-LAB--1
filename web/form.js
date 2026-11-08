@@ -43,7 +43,21 @@ form.addEventListener("input", () => {
 // Step 5 — on "submit": stop the page reload, build the course with
 // toCourse(values, nextId), append renderItem(course) to the list,
 // update the count and status, reset the form, disable the button again.
-// TODO
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const values = readForm();
+  if (!isComplete(values)) {
+    return;
+  }
+
+  const course = toCourse(values, nextId);
+  list.append(renderItem(course));
+  updateCount();
+  status.textContent = `Added ${course.code}`;
+  form.reset();
+  submit.disabled = true;
+});
 
 // Step 6 — one list item per course. Clicking the item toggles the
 // "selected" class; clicking Remove removes it WITHOUT also selecting it.
