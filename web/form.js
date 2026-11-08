@@ -48,6 +48,32 @@ form.addEventListener("input", () => {
 // Step 6 — one list item per course. Clicking the item toggles the
 // "selected" class; clicking Remove removes it WITHOUT also selecting it.
 function renderItem(course) {
-  // TODO: create <li class="item"><span>CS610 · Compilers · 4 cr</span><button>Remove</button></li>
-  // TODO: item click → toggle "selected"; remove click → remove the item (watch the bubbling!)
+  const item = document.createElement("li");
+  item.className = "item";
+
+  const label = document.createElement("span");
+  label.textContent = `${course.code} · ${course.title} · ${course.credits} cr`;
+
+  const remove = document.createElement("button");
+  remove.type = "button";
+  remove.textContent = "Remove";
+
+  item.append(label, remove);
+
+  item.addEventListener("click", () => {
+    item.classList.toggle("selected");
+  });
+
+  remove.addEventListener("click", (event) => {
+    // Without this the click bubbles up to the li and selects it too.
+    event.stopPropagation();
+    item.remove();
+    updateCount();
+  });
+
+  return item;
+}
+
+function updateCount() {
+  count.textContent = list.children.length;
 }
