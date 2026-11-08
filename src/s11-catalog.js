@@ -56,18 +56,21 @@ export function sortedBy(courses, field) {
 
 // Is at least one course full?
 export function anyFull(courses) {
-  throw new Error("TODO");
+  return courses.some((course) => course.seatsLeft === 0);
 }
 
 // Does every course have at least `n` seats?
 export function allHaveSeats(courses, n = 1) {
-  throw new Error("TODO");
+  return courses.every((course) => course.seatsLeft >= n);
 }
 
 // The cards a department page shows: that department, open courses only,
 // sorted by code, turned into card views. One chain.
 export function courseCards(courses, department) {
-  throw new Error("TODO");
+  return byDepartment(courses, department)
+    .filter((course) => course.seatsLeft > 0)
+    .sort(byField("code"))
+    .map(toCardView);
 }
 
 // Planner ids → the course objects, in planner order. Unknown ids are skipped.
