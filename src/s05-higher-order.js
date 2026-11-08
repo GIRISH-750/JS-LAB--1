@@ -2,13 +2,23 @@
 
 // How many items make predicate(item) return true? Write the loop yourself.
 export function countWhere(list, predicate) {
-  throw new Error("TODO");
+  let count = 0;
+  for (const item of list) {
+    if (predicate(item)) {
+      count += 1;
+    }
+  }
+  return count;
 }
 
 // Returns a comparator for Array.prototype.sort that orders by one field,
 // ascending. Works for strings and numbers.
 export function byField(field) {
-  throw new Error("TODO");
+  return (a, b) => {
+    if (a[field] < b[field]) return -1;
+    if (a[field] > b[field]) return 1;
+    return 0;
+  };
 }
 
 // A setter that accepts either a new value or a function that computes
